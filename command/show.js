@@ -28,7 +28,7 @@ module.exports = {
         replyText = 'empty'
       } else {
         obj = JSON.parse(data)
-        data.sort(sortByDue)
+        obj.sort(sortByDue)
         for (var i=0; i<obj.length; i++) {
           replyText += i + '. ' + obj[i].due + ' ' + obj[i].desc
         }
