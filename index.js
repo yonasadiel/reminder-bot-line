@@ -3,8 +3,8 @@ const line    = require('@line/bot-sdk')
 const fs      = require('fs')
 const config  = require('./config')
 
-const data_folder    = 'data'
-const command_folder = 'command'
+const data_folder    = './data/'
+const command_folder = './command/'
 
 const app = express()
 app.post('/webhook', line.middleware(config), (req, res) => {
