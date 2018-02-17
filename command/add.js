@@ -5,7 +5,7 @@ const data_folder = 'data/'
 module.exports = {
   receive  : function(args, client, event) {
     var id = ''
-    fs.readdir(process.cwd(), (err, files) => {
+    fs.readdir('.', (err, files) => {
       console.log(files)
     })
 
