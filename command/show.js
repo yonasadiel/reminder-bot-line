@@ -28,7 +28,7 @@ module.exports = {
       }
       client.replyMessage(event.replyToken, {
         type: 'text',
-        text: 'success'
+        text: replyText
       })
     })
   }
