@@ -24,16 +24,16 @@ module.exports = {
     var filename = data_folder + id + '.json'
     fs.readFile(filename, 'utf8', (err, data) => {
       if (err) {
-        console.log(err)
+        obj = []
       } else {
         obj = JSON.parse(data)
-        obj.push({
-          'due' : args[1],
-          'desc' : args[2]
-        })
-        json = JSON.stringify(obj)
-        fs.writeFile(filename, json, 'utf8', null)
       }
+      obj.push({
+        'due' : args[1],
+        'desc' : args[2]
+      })
+      json = JSON.stringify(obj)
+      fs.writeFile(filename, json, 'utf8', null)
     })
 
     client.replyMessage(client.replyToken, {
