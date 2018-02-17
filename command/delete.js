@@ -30,7 +30,12 @@ module.exports = {
         obj = JSON.parse(data)
         obj.sort(sortByDue)
         deleted = obj.splice(args[1]-1, 1)
-        replyText = 'deleted: ' + deleted.due + ' ' + deleted.desc
+        replyText = 'deleted: ' + JSON.stringify(deleted)
+
+        json = JSON.stringify(obj)
+        fs.writeFile(filename, json, 'utf8', (err) => {
+          if (err) console.log(err)
+        })
       }
       client.replyMessage(event.replyToken, {
         type: 'text',
