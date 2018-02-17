@@ -30,7 +30,9 @@ module.exports = {
         'desc' : args[2]
       })
       json = JSON.stringify(obj)
-      fs.writeFile(filename, json, 'utf8', null)
+      fs.writeFile(filename, json, 'utf8', (err) => {
+        console.log(err)
+      })
     })
 
     client.replyMessage(client.replyToken, {
