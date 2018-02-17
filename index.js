@@ -36,7 +36,6 @@ function handleEvent(event) {
       }
     }
 
-    console.log(args)
     fs.readdir(command_folder, (err, files) => {
       if (err) {
         client.replyMessage(event.replyToken, {
