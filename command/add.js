@@ -23,11 +23,8 @@ module.exports = {
 
     var filename = data_folder + id + '.json'
     fs.readFile(filename, 'utf8', (err, data) => {
-      if (err) {
-        obj = []
-      } else {
-        obj = JSON.parse(data)
-      }
+      var obj = []
+      if (!err) { obj = JSON.parse(data) }
       obj.push({
         'due' : args[1],
         'desc' : args[2]
