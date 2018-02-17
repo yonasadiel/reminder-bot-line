@@ -5,6 +5,7 @@ const data_folder = './data/'
 module.exports = {
   receive  : function(args, client, event) {
     var id = ''
+    console.log(process.cwd())
 
     if (event.source.type === "group") {
       id = event.source.groupId
@@ -29,11 +30,11 @@ module.exports = {
       })
       json = JSON.stringify(obj)
       fs.writeFile(filename, json, 'utf8', (err) => {
-        console.log(err)
+        if (err) console.log(err)
       })
     })
 
-    client.replyMessage(client.replyToken, {
+    client.replyMessage(event.replyToken, {
       type: 'text',
       text: 'success'
     })
