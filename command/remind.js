@@ -16,6 +16,7 @@ module.exports = {
         console.log(err)
       } else {
         for (var i=0; i<files.length; i++) {
+          if (!files[i].endsWith(".json")) continue;
           var id = files[i].substring(0, files[i].length-3)
           var filename = data_folder + files[i]
           var remindText = ''
