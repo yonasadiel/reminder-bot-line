@@ -7,13 +7,18 @@ const data_folder    = './data/'
 const command_folder = './command/'
 
 const app = express()
+const client = new line.Client(config)
 app.post('/webhook', line.middleware(config), (req, res) => {
   Promise
     .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
 })
 
-const client = new line.Client(config)
+app.get('/remind', (req, res) => {
+  const remind = require(command_folder + 'remind')
+  command.receive(null, client, null)
+})
+
 function handleEvent(event) {
   if (event.type !== 'message' || event.message.type !== 'text') {
     return Promise.resolve(null)
