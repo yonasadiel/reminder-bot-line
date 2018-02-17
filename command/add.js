@@ -1,11 +1,13 @@
 const fs = require('fs')
 
-const data_folder = './data/'
+const data_folder = 'data/'
 
 module.exports = {
   receive  : function(args, client, event) {
     var id = ''
-    console.log(process.cwd())
+    fs.readdir(process.cwd(), (err, files) => {
+      console.log(files)
+    })
 
     if (event.source.type === "group") {
       id = event.source.groupId
