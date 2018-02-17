@@ -1,0 +1,14 @@
+{
+  "name": "reminder-bot-ya",
+  "version": "1.0.0",
+  "description": "simple reminder bot for personal use",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "ya",
+  "license": "ISC",
+  "dependencies": {
+    "@line/bot-sdk": "^5.2.0"
+  }
+}
