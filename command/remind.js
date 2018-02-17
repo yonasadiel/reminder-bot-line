@@ -17,7 +17,7 @@ module.exports = {
       } else {
         for (var i=0; i<files.length; i++) {
           if (!files[i].endsWith(".json")) continue;
-          var id = files[i].substring(0, files[i].length-3)
+          var id = files[i].substring(0, files[i].length-5)
           var filename = data_folder + files[i]
           var remindText = ''
           fs.readFile(filename, 'utf8', (err, data) => {
@@ -31,7 +31,6 @@ module.exports = {
                 remindText += (i+1) + '. ' + obj[i].due + ' ' + obj[i].desc
                 if (i !== obj.length -1) { remindText += '\n' }
               }
-              console.log(id)
               client.pushMessage(id, {
                 type: 'text',
                 text: remindText
