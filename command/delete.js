@@ -29,10 +29,8 @@ module.exports = {
       } else {
         obj = JSON.parse(data)
         obj.sort(sortByDue)
-        for (var i=0; i<obj.length; i++) {
-          replyText += (i+1) + '. ' + obj[i].due + ' ' + obj[i].desc
-          if (i !== obj.length -1) { replyText += '\n' }
-        }
+        deleted = obj.splice(args[1]-1, 1)
+        replyText = 'deleted: ' + deleted.due + ' ' + deleted.desc
       }
       client.replyMessage(event.replyToken, {
         type: 'text',
