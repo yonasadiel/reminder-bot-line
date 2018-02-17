@@ -2,6 +2,12 @@ const fs = require('fs')
 
 const data_folder = '/app/data/'
 
+function sortByDue(a, b) {
+  if (a.due < b.due) return -1;
+  if (a.due > b.due) return 1;
+  return 0;
+}
+
 module.exports = {
   receive  : function(args, client, event) {
     var id = ''
@@ -22,8 +28,9 @@ module.exports = {
         replyText = 'empty'
       } else {
         obj = JSON.parse(data)
+        data.sort(sortByDue)
         for (var i=0; i<obj.length; i++) {
-          replyText += '- ' + obj[i].due + ' ' + obj[i].desc
+          replyText += i + '. ' + obj[i].due + ' ' + obj[i].desc
         }
       }
       client.replyMessage(event.replyToken, {
