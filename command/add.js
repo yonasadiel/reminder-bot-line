@@ -25,9 +25,11 @@ module.exports = {
     fs.readFile(filename, 'utf8', (err, data) => {
       var obj = []
       if (err) {
+        console.log('file not found')
         fs.closeSync(fs.openSync(filename, 'w'));
+      } else {
+        obj = JSON.parse(data)
       }
-      else { obj = JSON.parse(data) }
       obj.push({
         'due' : args[1],
         'desc' : args[2]
