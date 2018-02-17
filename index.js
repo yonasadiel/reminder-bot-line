@@ -44,19 +44,19 @@ function handleEvent(event) {
           text: err
         })
       } else {
+        var found = false
         for (var i=0; i<files.length; i++) {
-          var found = false
           if (config.commandSymbol + files[i] === args[0] + ".js") {
             const command = require(command_folder + files[i])
             found = true
             command.receive(args, client, event)
           }
-          if (!found) {
-            client.replyMessage(event.replyToken, {
-              type: 'text',
-              text: 'no command found'
-            })
-          }
+        }
+        if (!found) {
+          client.replyMessage(event.replyToken, {
+            type: 'text',
+            text: 'no command found'
+          })
         }
       }
     });
