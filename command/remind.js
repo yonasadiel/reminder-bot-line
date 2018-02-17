@@ -31,6 +31,7 @@ module.exports = {
                 remindText += (i+1) + '. ' + obj[i].due + ' ' + obj[i].desc
                 if (i !== obj.length -1) { remindText += '\n' }
               }
+              console.log(id)
               client.pushMessage(id, {
                 type: 'text',
                 text: remindText
