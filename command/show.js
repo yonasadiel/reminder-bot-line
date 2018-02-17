@@ -15,26 +15,21 @@ module.exports = {
     }
 
     var filename = data_folder + id + '.json'
+    var replyText = ''
     fs.readFile(filename, 'utf8', (err, data) => {
       var obj = []
       if (err) {
-        fs.closeSync(fs.openSync(filename, 'wx'))
+        replyText = 'empty'
       } else {
         obj = JSON.parse(data)
+        for (var i=0; i<obj.length; i++) {
+          replyText += '- ' + obj[i].due + ' ' + obj[i].desc
+        }
       }
-      obj.push({
-        'due' : args[1],
-        'desc' : args[2]
+      client.replyMessage(event.replyToken, {
+        type: 'text',
+        text: 'success'
       })
-      json = JSON.stringify(obj)
-      fs.writeFile(filename, json, 'utf8', (err) => {
-        if (err) console.log(err)
-      })
-    })
-
-    client.replyMessage(event.replyToken, {
-      type: 'text',
-      text: 'success'
     })
   }
 };
