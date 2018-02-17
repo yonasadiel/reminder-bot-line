@@ -1,15 +1,8 @@
 const fs = require('fs')
 
-const data_folder = '../data/'
+const data_folder = './data/'
 
 module.exports = {
-  argc       : 0,
-  args       : [],
-  event      : '',
-  client     : '',
-  session    : {},
-  session_id : '',
-
   receive  : function(args, client, event) {
     var id = ''
 
@@ -26,7 +19,7 @@ module.exports = {
       var obj = []
       if (err) {
         console.log('file not found')
-        fs.closeSync(fs.openSync(filename, 'w'));
+        fs.closeSync(fs.openSync(filename, 'wx'));
       } else {
         obj = JSON.parse(data)
       }
