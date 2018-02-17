@@ -8,4 +8,4 @@ const command_folder = './command/'
 const client = new line.Client(config)
 
 const remind = require(command_folder + 'remind')
-command.receive(null, client, null)
+remind.receive(null, client, null)

@@ -16,7 +16,7 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 
 app.get('/remind', (req, res) => {
   const remind = require(command_folder + 'remind')
-  command.receive(null, client, null)
+  remind.receive(null, client, null)
 })
 
 function handleEvent(event) {
