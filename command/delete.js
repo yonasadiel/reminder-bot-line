@@ -30,7 +30,7 @@ module.exports = {
         obj = JSON.parse(data)
         obj.sort(sortByDue)
         deleted = obj.splice(args[1]-1, 1)
-        replyText = 'deleted: ' + JSON.stringify(deleted)
+        replyText = 'deleted: ' + deleted[0].due + ' ' + deleted[0].desc
 
         json = JSON.stringify(obj)
         fs.writeFile(filename, json, 'utf8', (err) => {
