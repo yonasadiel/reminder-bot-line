@@ -21,13 +21,20 @@ module.exports = {
       id = event.source.userId
     }
 
-    var data = require(data_folder + id)
-    data.push({
-      'due' : args[1],
-      'desc' : args[2]
+    var filename = data_folder + id + '.json'
+    fs.readFile(filename, 'utf8', (err, data) => {
+      if (err) {
+        console.log(err)
+      } else {
+        obj = JSON.parse(data)
+        obj.push({
+          'due' : args[1],
+          'desc' : args[2]
+        })
+        json = JSON.stringify(obj)
+        fs.writeFile(filename, json, 'utf8', null)
+      }
     })
-    console.log(data)
-    fs.writeFile(data_folder + id + '.json')
 
     client.replyMessage(client.replyToken, {
       type: 'text',
