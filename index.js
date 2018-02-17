@@ -26,7 +26,7 @@ function handleEvent(event) {
     text = event.message.text
     for (var i=0; i<text.length; i++) {
       if (text[i] === quote) { quote = null }
-      else if (quote !== null && (text[i] === '\'' || text[i] === '"')) {
+      else if (quote === null && (text[i] === '\'' || text[i] === '"')) {
         quote = text[i]
       } else if (text[i] === ' ' && quote === null) {
         args_i++
