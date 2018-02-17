@@ -20,7 +20,7 @@ function handleEvent(event) {
   }
 
   if (event.message.text.startsWith(config.commandSymbol)) {
-    args = []
+    args = ['']
     args_i = 0
     quote = null
     text = event.message.text
