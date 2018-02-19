@@ -35,7 +35,7 @@ module.exports = {
                 type: 'text',
                 text: remindText
               })
-              console.log([id, remindText])
+              console.log([files, i, id, remindText])
             }
           })
         }
