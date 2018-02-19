@@ -19,24 +19,20 @@ module.exports = {
           if (!files[file_i].endsWith(".json")) continue;
           var id = files[file_i].substring(0, files[file_i].length-5)
           var filename = data_folder + files[file_i]
+
+          var data = fs.readFileSync(filename, 'utf8')
+          var obj = []
           var remindText = ''
-          fs.readFileSync(filename, 'utf8', (err, data) => {
-            var obj = []
-            if (err) {
-              console.log(err)
-            } else {
-              obj = JSON.parse(data)
-              obj.sort(sortByDue)
-              for (var i=0; i<obj.length; i++) {
-                remindText += (i+1) + '. ' + obj[i].due + ' ' + obj[i].desc
-                if (i !== obj.length -1) { remindText += '\n' }
-              }
-              client.pushMessage(id, {
-                type: 'text',
-                text: remindText
-              })
-              console.log([files, file_i, id, remindText])
-            }
+          
+          obj = JSON.parse(data)
+          obj.sort(sortByDue)
+          for (var i=0; i<obj.length; i++) {
+            remindText += (i+1) + '. ' + obj[i].due + ' ' + obj[i].desc
+            if (i !== obj.length -1) { remindText += '\n' }
+          }
+          client.pushMessage(id, {
+            type: 'text',
+            text: remindText
           })
         }
       }
