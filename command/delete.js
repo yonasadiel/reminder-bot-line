@@ -31,7 +31,7 @@ module.exports = {
       uri: url,      
     },
     (err, res, body) => {
-      data = JSON.parse(body)
+      var data = JSON.parse(body)
       var replyText = ''
       if (data.length === 0) {
         replyText = 'empty'
@@ -41,7 +41,11 @@ module.exports = {
         request({
           method: 'DELETE',
           uri: del_url
+        },
+        (err, res, body) => {
+          var del_data = JSON.parse(body)
         })
+        replyText = 'deleted: ' + data[args[1]-1].due + ' ' + data[args[1]-1].desc
       }
       gclient.replyMessage(gevent.replyToken, {
         type: 'text',
