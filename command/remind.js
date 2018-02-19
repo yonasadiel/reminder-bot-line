@@ -20,7 +20,7 @@ module.exports = {
           var id = files[file_i].substring(0, files[file_i].length-5)
           var filename = data_folder + files[file_i]
           var remindText = ''
-          fs.readFile(filename, 'utf8', (err, data) => {
+          fs.readFileSync(filename, 'utf8', (err, data) => {
             var obj = []
             if (err) {
               console.log(err)
