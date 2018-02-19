@@ -14,22 +14,19 @@ module.exports = {
       id = event.source.userId
     }
 
-    var filename = data_folder + id + '.json'
-    fs.readFile(filename, 'utf8', (err, data) => {
-      var obj = []
-      if (err) {
-        fs.closeSync(fs.openSync(filename, 'wx'))
-      } else {
-        obj = JSON.parse(data)
-      }
-      obj.push({
-        'due' : args[1],
-        'desc' : args[2]
-      })
-      json = JSON.stringify(obj)
-      fs.writeFile(filename, json, 'utf8', (err) => {
-        if (err) console.log(err)
-      })
+    var url = 'https://ares.yonasadiel.com/reminder-bot'
+    await request({
+      method: 'POST',
+      uri: url,
+      form: {
+        'due': args[1],
+        'desc': args[2],
+        'token': id
+      }  
+    },
+    (err, res, body) => {
+      data = JSON.parse(body)
+      //
     })
 
     client.replyMessage(event.replyToken, {
