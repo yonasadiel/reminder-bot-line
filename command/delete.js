@@ -40,7 +40,7 @@ module.exports = {
         var del_url = 'https://ares.yonasadiel.com/reminder-bot/' + data[args[1]-1].id
         request({
           method: 'DELETE',
-          uri: url
+          uri: del_url
         })
       }
       gclient.replyMessage(gevent.replyToken, {
