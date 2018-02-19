@@ -38,10 +38,6 @@ module.exports = {
           text: remindText
         })
       }
-      gclient.replyMessage(gevent.replyToken, {
-        type: 'text',
-        text: replyText
-      })
     })
   }
 };
