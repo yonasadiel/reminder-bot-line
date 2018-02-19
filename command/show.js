@@ -25,7 +25,7 @@ module.exports = {
       id = event.source.userId
     }
 
-    var url = 'https://yonasadiel.com/reminder-bot?token=' + id
+    var url = 'https://ares.yonasadiel.com/reminder-bot?token=' + id
     await request({
       method: 'GET',
       uri: url,      
