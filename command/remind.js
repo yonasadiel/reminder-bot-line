@@ -17,7 +17,7 @@ module.exports = {
     gevent  = event
 
     var url = 'https://ares.yonasadiel.com/reminder-bot'
-    await request({
+    request({
       method: 'GET',
       uri: url,      
     },
