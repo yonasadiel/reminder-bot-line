@@ -1,6 +1,9 @@
 const fs = require('fs')
+const request = require('request')
 
 const data_folder = '/app/data/'
+var gclient = ''
+var gevent = ''
 
 function sortByDue(a, b) {
   if (a.due < b.due) return -1;
@@ -9,35 +12,36 @@ function sortByDue(a, b) {
 }
 
 module.exports = {
-  receive  : function(args, client, event) {
+  receive : function(args, client, event) {
+    gclient = client
+    gevent  = event
 
-    fs.readdir(data_folder, (err, files) => {
-      if (err) {
-        console.log(err)
-      } else {
-        for (var file_i=0; file_i<files.length; file_i++) {
-          if (!files[file_i].endsWith(".json")) continue;
-          var id = files[file_i].substring(0, files[file_i].length-5)
-          var filename = data_folder + files[file_i]
+    var url = 'https://ares.yonasadiel.com/reminder-bot'
+    await request({
+      method: 'GET',
+      uri: url,      
+    },
+    (err, res, body) => {
+      var data = JSON.parse(body)
+      var replyText = ''
+      for (var token in data) {
+        var obj = data[token]
+        var remindText = ''
+        obj.sort(sortByDue)
 
-          var data = fs.readFileSync(filename, 'utf8')
-          var obj = []
-          var remindText = ''
-          
-          obj = JSON.parse(data)
-          obj.sort(sortByDue)
-          for (var i=0; i<obj.length; i++) {
-            remindText += (i+1) + '. ' + obj[i].due + ' ' + obj[i].desc
-            if (i !== obj.length -1) { remindText += '\n' }
-          }
-          client.pushMessage(id, {
-            type: 'text',
-            text: remindText
-          })
+        for (var i=0; i<obj.length; i++) {
+          remindText += (i+1) + '. ' + obj[i].due + ' ' + obj[i].desc
+          if (i !== obj.length -1) { remindText += '\n' }
         }
+        gclient.pushMessage(token, {
+          type: 'text',
+          text: remindText
+        })
       }
-    });
-
-    
+      gclient.replyMessage(gevent.replyToken, {
+        type: 'text',
+        text: replyText
+      })
+    })
   }
 };

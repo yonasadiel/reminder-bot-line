@@ -12,7 +12,7 @@ function sortByDue(a, b) {
 }
 
 module.exports = {
-  receive  : async function(args, client, event) {
+  receive : function(args, client, event) {
     var id = ''
     gclient = client
     gevent  = event
