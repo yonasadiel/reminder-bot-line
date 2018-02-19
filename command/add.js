@@ -3,7 +3,7 @@ const fs = require('fs')
 const data_folder = '/app/data/'
 
 module.exports = {
-  receive  : function(args, client, event) {
+  receive : function(args, client, event) {
     var id = ''
 
     if (event.source.type === "group") {
@@ -15,7 +15,7 @@ module.exports = {
     }
 
     var url = 'https://ares.yonasadiel.com/reminder-bot'
-    await request({
+    request({
       method: 'POST',
       uri: url,
       form: {
