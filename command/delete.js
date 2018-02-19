@@ -1,6 +1,9 @@
 const fs = require('fs')
+const request = require('request')
 
 const data_folder = '/app/data/'
+var gclient = ''
+var gevent = ''
 
 function sortByDue(a, b) {
   if (a.due < b.due) return -1;
@@ -11,6 +14,8 @@ function sortByDue(a, b) {
 module.exports = {
   receive  : function(args, client, event) {
     var id = ''
+    gclient = client
+    gevent  = event
 
     if (event.source.type === "group") {
       id = event.source.groupId
@@ -20,24 +25,25 @@ module.exports = {
       id = event.source.userId
     }
 
-    var filename = data_folder + id + '.json'
-    var replyText = ''
-    fs.readFile(filename, 'utf8', (err, data) => {
-      var obj = []
-      if (err) {
+    var url = 'https://ares.yonasadiel.com/reminder-bot?token=' + id
+    await request({
+      method: 'GET',
+      uri: url,      
+    },
+    (err, res, body) => {
+      data = JSON.parse(body)
+      var replyText = ''
+      if (data.length === 0) {
         replyText = 'empty'
       } else {
-        obj = JSON.parse(data)
-        obj.sort(sortByDue)
-        deleted = obj.splice(args[1]-1, 1)
-        replyText = 'deleted: ' + deleted[0].due + ' ' + deleted[0].desc
-
-        json = JSON.stringify(obj)
-        fs.writeFile(filename, json, 'utf8', (err) => {
-          if (err) console.log(err)
+        data.sort(sortByDue)
+        var del_url = 'https://ares.yonasadiel.com/reminder-bot/' + data[args[1]-1].id
+        request({
+          method: 'DELETE',
+          uri: url
         })
       }
-      client.replyMessage(event.replyToken, {
+      gclient.replyMessage(gevent.replyToken, {
         type: 'text',
         text: replyText
       })

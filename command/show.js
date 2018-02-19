@@ -41,11 +41,11 @@ module.exports = {
           replyText += (i+1) + '. ' + data[i].due + ' ' + data[i].desc
           if (i !== data.length -1) { replyText += '\n' }
         }
-        gclient.replyMessage(gevent.replyToken, {
-          type: 'text',
-          text: replyText
-        })
       }
+      gclient.replyMessage(gevent.replyToken, {
+        type: 'text',
+        text: replyText
+      })
     })
   }
 };
