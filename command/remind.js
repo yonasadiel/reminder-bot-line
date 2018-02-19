@@ -35,6 +35,7 @@ module.exports = {
                 type: 'text',
                 text: remindText
               })
+              console.log([id, remindText])
             }
           })
         }
