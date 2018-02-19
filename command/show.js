@@ -26,7 +26,7 @@ module.exports = {
     }
 
     var url = 'https://ares.yonasadiel.com/reminder-bot?token=' + id
-    await request({
+    request({
       method: 'GET',
       uri: url,      
     },
