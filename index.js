@@ -66,6 +66,15 @@ function handleEvent(event) {
       }
     });
 
+  } else {
+    let re = /wi+z+/i
+    let text = event.message.text
+    if (text.match(re)) {
+      client.replyMessage(event.replyToken, {
+        type: 'text',
+        text: 'spam detected : ' + text
+      })
+    }
   }
 }
 
