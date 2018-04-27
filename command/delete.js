@@ -45,6 +45,8 @@ module.exports = {
         replyText = 'there is no reminder, what on earth you want to delete?'
       } else if (data.length < args[1]-1) {
         replyText = 'wait, what? you only have ' + data.length + ' reminder bruh.'
+      } else if () {
+        replyText = 'weird, i only know number 1 to ' + data.length
       } else {
         data.sort(sortByDue)
         var del_url = 'https://ares.yonasadiel.com/reminder-bot/' + data[args[1]-1].id
