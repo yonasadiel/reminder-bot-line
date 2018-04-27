@@ -66,6 +66,22 @@ function handleEvent(event) {
       }
     });
 
+  } else {
+    let re = /\bw+i+z+\b/i
+    let text = event.message.text
+    if (text.match(re)) {
+      client.replyMessage(event.replyToken, [
+        {
+          type: 'text',
+          text: 'spam detected : ' + text
+        },
+        {
+          type: 'audio',
+          originalContentUrl: 'https://yonasadiel.com/drop/wiz.m4a',
+          duration: 1856
+        }
+      ])
+    }
   }
 }
 
