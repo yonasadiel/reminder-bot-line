@@ -7,6 +7,14 @@ module.exports = {
   receive : function(args, client, event) {
     var id = ''
 
+    if (args.length != 2) {
+      gclient.replyMessage(gevent.replyToken, {
+        type: 'text',
+        text: 'usage: !add <key> <desc>'
+      })
+      return
+    }
+
     if (event.source.type === "group") {
       id = event.source.groupId
     } else if (event.source.type === "room") {

@@ -17,6 +17,14 @@ module.exports = {
     gclient = client
     gevent  = event
 
+    if (args.length != 2) {
+      gclient.replyMessage(gevent.replyToken, {
+        type: 'text',
+        text: 'usage: !delete <id>'
+      })
+      return
+    }
+
     if (event.source.type === "group") {
       id = event.source.groupId
     } else if (event.source.type === "room") {
@@ -34,7 +42,9 @@ module.exports = {
       var data = JSON.parse(body)
       var replyText = ''
       if (data.length === 0) {
-        replyText = 'empty'
+        replyText = 'there is no reminder, what on earth you want to delete?'
+      } else if (data.length < args[1]-1) {
+        replyText = 'wait, what? you only have ' + data.length + ' reminder bruh.'
       } else {
         data.sort(sortByDue)
         var del_url = 'https://ares.yonasadiel.com/reminder-bot/' + data[args[1]-1].id
@@ -45,7 +55,7 @@ module.exports = {
         (err, res, body) => {
           var del_data = JSON.parse(body)
         })
-        replyText = 'deleted: ' + data[args[1]-1].due + ' ' + data[args[1]-1].desc
+        replyText = 'deleted: ' + data[args[1]-1].due + ' ' + data[args[1]-1].desc + '\n'
       }
       gclient.replyMessage(gevent.replyToken, {
         type: 'text',

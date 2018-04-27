@@ -34,7 +34,7 @@ module.exports = {
       data = JSON.parse(body)
       var replyText = ''
       if (data.length === 0) {
-        replyText = 'empty'
+        replyText = 'empty! maybe it\'s planning a vacation?'
       } else {
         data.sort(sortByDue)
         for (var i=0; i<data.length; i++) {
