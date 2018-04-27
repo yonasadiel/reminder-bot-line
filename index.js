@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require('express')
 const line    = require('@line/bot-sdk')
 const fs      = require('fs')
@@ -85,5 +84,5 @@ function handleEvent(event) {
     }
   }
 }
-
+  
 app.listen(process.env.PORT || 5000)
