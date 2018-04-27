@@ -42,11 +42,29 @@ module.exports = {
       var data = JSON.parse(body)
       var replyText = ''
       if (data.length === 0) {
-        replyText = 'there is no reminder, what on earth you want to delete?'
+        replies = [
+          'there is no reminder, what on earth you want to delete?',
+          'you have no reminder... don\'t act like you have one.',
+          'no reminder found. maybe you want to add some first?',
+          'umm... looks like you forgot you don\'t have reminder... or am i?'
+        ]
+        replyText = replies[Math.floor(Math.random() * replies.length)]
       } else if (data.length < args[1]-1) {
-        replyText = 'wait, what? you only have ' + data.length + ' reminder bruh.'
-      } else if () {
-        replyText = 'weird, i only know number 1 to ' + data.length
+        replies = [
+          'wait, what? you only have ' + data.length + ' reminder bruh.',
+          'clearly you don\'t have that much things to do.',
+          'maybe you should !show before !delete',
+          'what? maybe this person below know what do you mean by that\nvvvv'
+        ]
+        replyText = replies[Math.floor(Math.random() * replies.length)]
+      } else if (args[1]-1 <= 0) {
+        replies = [
+          'weird, i only know number 1 to ' + data.length,
+          'hey! i\'m not that stupid, you know.',
+          'typo?',
+          'oh no. i\'m buffer-overflowing.'
+        ]
+        replyText = replies[Math.floor(Math.random() * replies.length)]
       } else {
         data.sort(sortByDue)
         var del_url = 'https://ares.yonasadiel.com/reminder-bot/' + data[args[1]-1].id
