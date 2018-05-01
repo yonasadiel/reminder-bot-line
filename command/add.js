@@ -7,8 +7,8 @@ module.exports = {
   receive : function(args, client, event) {
     var id = ''
 
-    if (args.length != 2) {
-      gclient.replyMessage(gevent.replyToken, {
+    if (args.length != 3) {
+      client.replyMessage(gevent.replyToken, {
         type: 'text',
         text: 'usage: !add <key> <desc>'
       })
