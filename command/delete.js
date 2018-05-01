@@ -49,7 +49,7 @@ module.exports = {
           'umm... looks like you forgot you don\'t have reminder... or am i?'
         ]
         replyText = replies[Math.floor(Math.random() * replies.length)]
-      } else if (data.length < args[1]-1) {
+      } else if (data.length <= args[1]-1) {
         replies = [
           'wait, what? you only have ' + data.length + ' reminder bruh.',
           'clearly you don\'t have that much things to do.',
@@ -57,7 +57,7 @@ module.exports = {
           'what? maybe this person below know what do you mean by that\nvvvv'
         ]
         replyText = replies[Math.floor(Math.random() * replies.length)]
-      } else if (args[1]-1 <= 0) {
+      } else if (args[1]-1 < 0) {
         replies = [
           'weird, i only know number 1 to ' + data.length,
           'hey! i\'m not that stupid, you know.',
