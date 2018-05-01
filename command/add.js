@@ -8,7 +8,7 @@ module.exports = {
     var id = ''
 
     if (args.length != 3) {
-      client.replyMessage(gevent.replyToken, {
+      client.replyMessage(event.replyToken, {
         type: 'text',
         text: 'usage: !add <key> <desc>'
       })
