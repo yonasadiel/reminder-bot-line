@@ -41,7 +41,13 @@ module.exports = {
     (err, res, body) => {
       var data = JSON.parse(body)
       var replyText = ''
-      if (data.length === 0) {
+      if (!Number.isInteger(args[1])) {
+        replies = [
+          'integer, please.',
+          'please input the number of the reminder.'
+        ]
+        replyText = replies[Math.floor(Math.random() * replies.length)]
+      } else if (data.length === 0) {
         replies = [
           'there is no reminder, what on earth you want to delete?',
           'you have no reminder... don\'t act like you have one.',
